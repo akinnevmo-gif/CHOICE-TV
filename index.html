@@ -40,10 +40,17 @@
 <!-- 1. Free streaming channels -->
 <section id="channels">
   <h2 class="section-title">50+ Free Streaming Channels</h2>
-  <!-- Add many channel links as previously provided -->
   <div class="channel-card"><h3>Pluto TV</h3><p>Free live TV and movies</p><a class="button" href="https://pluto.tv/" target="_blank">Watch</a></div>
   <div class="channel-card"><h3>Tubi TV</h3><p>Free movies and TV</p><a class="button" href="https://tubitv.com/" target="_blank">Watch</a></div>
   <div class="channel-card"><h3>Plex TV</h3><p>Free live TV and movies</p><a class="button" href="https://www.plex.tv/watch-free/" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Red Bull TV</h3><p>Sports and adventure</p><a class="button" href="https://www.redbull.com/int-en/live-tv" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Bloomberg</h3><p>Business news</p><a class="button" href="https://www.bloomberg.com/live/us" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Sky News</h3><p>Live news stream (YouTube)</p><a class="button" href="https://www.youtube.com/embed/9Auq9mYxFEE" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>DW (Deutsche Welle)</h3><p>German and international news</p><a class="button" href="https://www.dw.com/en/top-stories/live-tv/s-9097" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>France 24</h3><p>French and world news</p><a class="button" href="https://www.france24.com/en/live" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>NHK World Japan</h3><p>Japanese news and documentaries</p><a class="button" href="https://www3.nhk.or.jp/nhkworld/en/live/" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Al Jazeera English</h3><p>Global news</p><a class="button" href="https://www.aljazeera.com/live/" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>NASA TV</h3><p>Live space missions</p><a class="button" href="https://www.nasa.gov/multimedia/nasatv/" target="_blank">Watch</a></div>
   <!-- ...add up to 50 channels as needed... -->
 </section>
 <!-- 2. Latest African Movies -->
@@ -69,7 +76,7 @@
 <section id="american_movies">
   <h2 class="section-title">Latest American Movies</h2>
   <div class="video-card"><h3>Latest Hollywood Movies (YouTube)</h3>
-    <a class="button" href="https://www.youtube.com/results?search_query=latest+hollywood+movies+2025" target="_blank">Watch</a>
+    <a class="button" href="https://www.youtube.com/results?search_query=latest+hollywood+movies" target="_blank">Watch</a>
   </div>
   <div class="video-card"><h3>Tubi - Hollywood Hits</h3>
     <a class="button" href="https://tubitv.com/category/hollywood_hits" target="_blank">Watch</a>
@@ -159,142 +166,6 @@
 <footer class="text-center p-4 mt-8 border-t border-gray-700">
   &copy; 2025 Choice TV - Advanced Free Streaming Platform
 </footer>
-
-<!-- Firebase Modular v9+ -->
-<script type="module">
-  // Firebase SDK imports
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
-  import { getFirestore, collection, addDoc, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-  
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyDN-xFOjhGnyQn9NNiItdMNKMXhNYPz2aU",
-    authDomain: "choice-tv-6fb5a.firebaseapp.com",
-    projectId: "choice-tv-6fb5a",
-    storageBucket: "choice-tv-6fb5a.appspot.com",
-    messagingSenderId: "809211007051",
-    appId: "1:809211007051:web:bb2e01e78978660b8dfdce",
-    measurementId: "G-14EVNGW3CC"
-  };
-
-  // Firebase init
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-  const db = getFirestore(app);
-  const storage = getStorage(app);
-
-  // Only admin can upload (your email)
-  const ADMIN_EMAIL = "sokpahakinsaye@gmail.com";
-  
-  // Auth UI
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const uploadSection = document.getElementById("upload-section");
-
-  loginBtn.onclick = () => signInWithPopup(auth, provider);
-  logoutBtn.onclick = () => signOut(auth);
-
-  onAuthStateChanged(auth, user => {
-    if (user && user.email === ADMIN_EMAIL) {
-      uploadSection.classList.remove("hidden");
-      loginBtn.classList.add("hidden");
-      logoutBtn.classList.remove("hidden");
-    } else {
-      uploadSection.classList.add("hidden");
-      loginBtn.classList.remove("hidden");
-      logoutBtn.classList.add("hidden");
-    }
-  });
-
-  // Upload form
-  const uploadForm = document.getElementById("uploadForm");
-  uploadForm?.addEventListener("submit", async e => {
-    e.preventDefault();
-    const type = document.getElementById("type").value;
-    const title = document.getElementById("title").value;
-    const desc = document.getElementById("desc").value;
-    const file = document.getElementById("file").files[0];
-    const status = document.getElementById("upload-status");
-    status.innerText = "Uploading...";
-    try {
-      // Upload file to Firebase Storage
-      const storage_path = `${type}/${Date.now()}_${file.name}`;
-      const fileRef = storageRef(storage, storage_path);
-      await uploadBytes(fileRef, file);
-      const url = await getDownloadURL(fileRef);
-      // Save metadata to Firestore
-      await addDoc(collection(db, "user_uploads"), {
-        type, title, desc, url,
-        createdAt: new Date().toISOString(),
-        uploader: auth.currentUser.email
-      });
-      status.innerText = "Upload successful!";
-      uploadForm.reset();
-      loadUserUploads();
-    } catch (err) {
-      status.innerText = "Upload failed: " + err;
-    }
-  });
-
-  // Display uploads: only your uploads
-  async function loadUserUploads() {
-    const listDiv = document.getElementById("my-uploads-list");
-    listDiv.innerHTML = "";
-    if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) return;
-    const q = query(collection(db, "user_uploads"),
-      where("uploader", "==", ADMIN_EMAIL),
-      orderBy("createdAt", "desc")
-    );
-    const snapshot = await getDocs(q);
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      let card = document.createElement("div");
-      card.className = `${data.type}-card`;
-      card.innerHTML = `<h3 class="font-semibold mb-2">${data.title}</h3>
-        <p>${data.desc || ""}</p>
-        ${data.type === "movie" || data.type === "educational" ? `<video controls src="${data.url}"></video>` : ""}
-        ${data.type === "music" ? `<audio controls src="${data.url}"></audio>` : ""}
-        ${data.type === "news" ? `<video controls src="${data.url}"></video>` : ""}
-        <p class="text-xs text-gray-400">Uploaded: ${new Date(data.createdAt).toLocaleString()}</p>`;
-      listDiv.appendChild(card);
-    });
-  }
-  // Load uploads on auth state change
-  onAuthStateChanged(auth, loadUserUploads);
-
-  // Also show latest uploads on public pages (optional advanced feature)
-  async function showPublicUploads(type, containerId) {
-    const div = document.getElementById(containerId);
-    div.innerHTML = "";
-    const q = query(collection(db, "user_uploads"),
-      where("type", "==", type),
-      orderBy("createdAt", "desc")
-    );
-    const snapshot = await getDocs(q);
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      let card = document.createElement("div");
-      card.className = `${type}-card`;
-      card.innerHTML = `<h3 class="font-semibold mb-2">${data.title}</h3>
-        <p>${data.desc || ""}</p>
-        ${type === "movie" || type === "educational" ? `<video controls src="${data.url}"></video>` : ""}
-        ${type === "music" ? `<audio controls src="${data.url}"></audio>` : ""}
-        ${type === "news" ? `<video controls src="${data.url}"></video>` : ""}
-        <p class="text-xs text-gray-400">Uploaded by admin</p>`;
-      div.appendChild(card);
-    });
-  }
-  // Show public uploads in movie/music/news/educational sections
-  showPublicUploads("movie", "user-movies");
-  showPublicUploads("music", "user-music");
-  showPublicUploads("news", "user-news");
-  showPublicUploads("educational", "user-educational");
-
-</script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
