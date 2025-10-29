@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choice TV - Advanced Free Streaming</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  body { background-color: #111; color: #fff; font-family: Arial, sans-serif; }
+  header { background-color: #222; padding: 1rem; text-align: center; }
+  nav a { margin: 0 0.5rem; color: #fff; text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  .section-title { margin-top: 2rem; font-size: 1.75rem; font-weight: bold; }
+  .channel-card, .video-card, .music-card, .news-card { background: #222; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+  video, audio, iframe { width: 100%; height: auto; border-radius: 0.5rem; }
+  .hidden { display: none; }
+  .upload-form input, .upload-form textarea, .upload-form select { display: block; margin-bottom: 1rem; width: 100%; padding: 0.5rem; color: #222; }
+  .upload-form label { font-weight: bold; margin-bottom: 0.3rem; }
+  .upload-form button { background: #3182ce; color: #fff; font-weight: bold; padding: 0.5rem 1rem; border-radius: 0.3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="text-3xl font-bold">Choice TV - Advanced Free Streaming</h1>
+  <nav>
+    <a href="#channels">Channels</a>
+    <a href="#african_movies">African Movies</a>
+    <a href="#american_movies">American Movies</a>
+    <a href="#netflix_free">Netflix Free Movies</a>
+    <a href="#movies">Free Movies</a>
+    <a href="#music">Free Music</a>
+    <a href="#educational">Educational</a>
+    <a href="#news">News</a>
+    <a href="#live">Live Streaming</a>
+    <a href="#my_uploads">My Uploads</a>
+    <a href="#upload">Upload (Admin)</a>
+  </nav>
+</header>
+<main class="p-4">
+<!-- 1. Free streaming channels -->
+<section id="channels">
+  <h2 class="section-title">50+ Free Streaming Channels</h2>
+  <!-- Add many channel links as previously provided -->
+  <div class="channel-card"><h3>Pluto TV</h3><p>Free live TV and movies</p><a class="button" href="https://pluto.tv/" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Tubi TV</h3><p>Free movies and TV</p><a class="button" href="https://tubitv.com/" target="_blank">Watch</a></div>
+  <div class="channel-card"><h3>Plex TV</h3><p>Free live TV and movies</p><a class="button" href="https://www.plex.tv/watch-free/" target="_blank">Watch</a></div>
+  <!-- ...add up to 50 channels as needed... -->
+</section>
+<!-- 2. Latest African Movies -->
+<section id="african_movies">
+  <h2 class="section-title">Latest African Movies</h2>
+  <div class="video-card"><h3>Best Nigerian Movies (YouTube)</h3>
+    <a class="button" href="https://www.youtube.com/results?search_query=latest+nigerian+movies" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>African Movies Channel (YouTube)</h3>
+    <a class="button" href="https://www.youtube.com/@africanmovies" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Tubi - Nollywood & African Films</h3>
+    <a class="button" href="https://tubitv.com/category/african-movies" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Latest Ghanaian Movies (YouTube)</h3>
+    <a class="button" href="https://www.youtube.com/results?search_query=latest+ghanaian+movies" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>African Movies on Pluto TV</h3>
+    <a class="button" href="https://pluto.tv/en/on-demand/movies?genre=african" target="_blank">Watch</a>
+  </div>
+</section>
+<!-- 3. Latest American Movies -->
+<section id="american_movies">
+  <h2 class="section-title">Latest American Movies</h2>
+  <div class="video-card"><h3>Latest Hollywood Movies (YouTube)</h3>
+    <a class="button" href="https://www.youtube.com/results?search_query=latest+hollywood+movies+2025" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Tubi - Hollywood Hits</h3>
+    <a class="button" href="https://tubitv.com/category/hollywood_hits" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Pluto TV - American Movies</h3>
+    <a class="button" href="https://pluto.tv/en/on-demand/movies?genre=hollywood" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Plex TV - Free American Movies</h3>
+    <a class="button" href="https://www.plex.tv/watch-free/" target="_blank">Watch</a>
+  </div>
+</section>
+<!-- 4. Netflix Free Movies (redirects) -->
+<section id="netflix_free">
+  <h2 class="section-title">Netflix Free Movies (on other platforms)</h2>
+  <div class="video-card"><h3>Netflix Free on YouTube</h3>
+    <a class="button" href="https://www.youtube.com/results?search_query=netflix+free+full+movies" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Netflix Free on Tubi</h3>
+    <a class="button" href="https://tubitv.com/search/netflix" target="_blank">Watch</a>
+  </div>
+  <div class="video-card"><h3>Netflix Free on Pluto TV</h3>
+    <a class="button" href="https://pluto.tv/search/details?query=netflix" target="_blank">Watch</a>
+  </div>
+</section>
+<!-- 5. Free Movies (archive and user uploads) -->
+<section id="movies">
+  <h2 class="section-title">Free Movies</h2>
+  <div class="video-card"><h3>Internet Archive Movies</h3><p>Thousands of public domain movies.</p><a class="button" href="https://archive.org/details/movies" target="_blank">Browse</a></div>
+  <div id="user-movies"></div>
+</section>
+<!-- 6. Free Music (redirects + your uploads) -->
+<section id="music">
+  <h2 class="section-title">Free Music</h2>
+  <div class="music-card"><h3>Free Music Archive</h3><p>Legal free music streaming.</p><a class="button" href="https://freemusicarchive.org/" target="_blank">Browse</a></div>
+  <div id="user-music"></div>
+</section>
+<!-- 7. Educational -->
+<section id="educational">
+  <h2 class="section-title">Educational</h2>
+  <div class="video-card"><h3>Khan Academy</h3><p>Free educational videos.</p><a class="button" href="https://www.khanacademy.org/" target="_blank">Browse</a></div>
+  <div id="user-educational"></div>
+</section>
+<!-- 8. News -->
+<section id="news">
+  <h2 class="section-title">News</h2>
+  <div class="news-card"><h3>Sky News (YouTube)</h3><p>Live news stream.</p><a class="button" href="https://www.youtube.com/embed/9Auq9mYxFEE" target="_blank">Watch</a></div>
+  <div id="user-news"></div>
+</section>
+<!-- 9. Live streaming -->
+<section id="live">
+  <h2 class="section-title">Live Streaming</h2>
+  <div class="channel-card"><h3>YouTube Live</h3><p>Official live streams.</p><a class="button" href="https://www.youtube.com/live" target="_blank">Browse</a></div>
+</section>
+<!-- 10. Your uploads (movies, music, news, educational) -->
+<section id="my_uploads">
+  <h2 class="section-title">My Uploaded Content</h2>
+  <div id="my-uploads-list"></div>
+</section>
+<!-- 11. Upload form (admin only) -->
+<section id="upload">
+  <h2 class="section-title">Admin Upload Center</h2>
+  <div id="upload-section" class="upload-form hidden">
+    <form id="uploadForm">
+      <label for="type">Content Type</label>
+      <select id="type" required>
+        <option value="movie">Movie</option>
+        <option value="music">Music</option>
+        <option value="news">News</option>
+        <option value="educational">Educational</option>
+      </select>
+      <label for="title">Title</label>
+      <input id="title" type="text" required>
+      <label for="desc">Description</label>
+      <textarea id="desc" rows="2"></textarea>
+      <label for="file">Upload File (mp4, mp3, etc.)</label>
+      <input id="file" type="file" required>
+      <button type="submit">Upload</button>
+    </form>
+    <div id="upload-status"></div>
+  </div>
+  <div id="login-section">
+    <button id="loginBtn">Sign in as Admin</button>
+    <button id="logoutBtn" class="hidden">Sign Out</button>
+  </div>
+</section>
+</main>
+<footer class="text-center p-4 mt-8 border-t border-gray-700">
+  &copy; 2025 Choice TV - Advanced Free Streaming Platform
+</footer>
+
+<!-- Firebase Modular v9+ -->
+<script type="module">
+  // Firebase SDK imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+  import { getFirestore, collection, addDoc, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+  
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDN-xFOjhGnyQn9NNiItdMNKMXhNYPz2aU",
+    authDomain: "choice-tv-6fb5a.firebaseapp.com",
+    projectId: "choice-tv-6fb5a",
+    storageBucket: "choice-tv-6fb5a.appspot.com",
+    messagingSenderId: "809211007051",
+    appId: "1:809211007051:web:bb2e01e78978660b8dfdce",
+    measurementId: "G-14EVNGW3CC"
+  };
+
+  // Firebase init
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  // Only admin can upload (your email)
+  const ADMIN_EMAIL = "sokpahakinsaye@gmail.com";
+  
+  // Auth UI
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const uploadSection = document.getElementById("upload-section");
+
+  loginBtn.onclick = () => signInWithPopup(auth, provider);
+  logoutBtn.onclick = () => signOut(auth);
+
+  onAuthStateChanged(auth, user => {
+    if (user && user.email === ADMIN_EMAIL) {
+      uploadSection.classList.remove("hidden");
+      loginBtn.classList.add("hidden");
+      logoutBtn.classList.remove("hidden");
+    } else {
+      uploadSection.classList.add("hidden");
+      loginBtn.classList.remove("hidden");
+      logoutBtn.classList.add("hidden");
+    }
+  });
+
+  // Upload form
+  const uploadForm = document.getElementById("uploadForm");
+  uploadForm?.addEventListener("submit", async e => {
+    e.preventDefault();
+    const type = document.getElementById("type").value;
+    const title = document.getElementById("title").value;
+    const desc = document.getElementById("desc").value;
+    const file = document.getElementById("file").files[0];
+    const status = document.getElementById("upload-status");
+    status.innerText = "Uploading...";
+    try {
+      // Upload file to Firebase Storage
+      const storage_path = `${type}/${Date.now()}_${file.name}`;
+      const fileRef = storageRef(storage, storage_path);
+      await uploadBytes(fileRef, file);
+      const url = await getDownloadURL(fileRef);
+      // Save metadata to Firestore
+      await addDoc(collection(db, "user_uploads"), {
+        type, title, desc, url,
+        createdAt: new Date().toISOString(),
+        uploader: auth.currentUser.email
+      });
+      status.innerText = "Upload successful!";
+      uploadForm.reset();
+      loadUserUploads();
+    } catch (err) {
+      status.innerText = "Upload failed: " + err;
+    }
+  });
+
+  // Display uploads: only your uploads
+  async function loadUserUploads() {
+    const listDiv = document.getElementById("my-uploads-list");
+    listDiv.innerHTML = "";
+    if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) return;
+    const q = query(collection(db, "user_uploads"),
+      where("uploader", "==", ADMIN_EMAIL),
+      orderBy("createdAt", "desc")
+    );
+    const snapshot = await getDocs(q);
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      let card = document.createElement("div");
+      card.className = `${data.type}-card`;
+      card.innerHTML = `<h3 class="font-semibold mb-2">${data.title}</h3>
+        <p>${data.desc || ""}</p>
+        ${data.type === "movie" || data.type === "educational" ? `<video controls src="${data.url}"></video>` : ""}
+        ${data.type === "music" ? `<audio controls src="${data.url}"></audio>` : ""}
+        ${data.type === "news" ? `<video controls src="${data.url}"></video>` : ""}
+        <p class="text-xs text-gray-400">Uploaded: ${new Date(data.createdAt).toLocaleString()}</p>`;
+      listDiv.appendChild(card);
+    });
+  }
+  // Load uploads on auth state change
+  onAuthStateChanged(auth, loadUserUploads);
+
+  // Also show latest uploads on public pages (optional advanced feature)
+  async function showPublicUploads(type, containerId) {
+    const div = document.getElementById(containerId);
+    div.innerHTML = "";
+    const q = query(collection(db, "user_uploads"),
+      where("type", "==", type),
+      orderBy("createdAt", "desc")
+    );
+    const snapshot = await getDocs(q);
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      let card = document.createElement("div");
+      card.className = `${type}-card`;
+      card.innerHTML = `<h3 class="font-semibold mb-2">${data.title}</h3>
+        <p>${data.desc || ""}</p>
+        ${type === "movie" || type === "educational" ? `<video controls src="${data.url}"></video>` : ""}
+        ${type === "music" ? `<audio controls src="${data.url}"></audio>` : ""}
+        ${type === "news" ? `<video controls src="${data.url}"></video>` : ""}
+        <p class="text-xs text-gray-400">Uploaded by admin</p>`;
+      div.appendChild(card);
+    });
+  }
+  // Show public uploads in movie/music/news/educational sections
+  showPublicUploads("movie", "user-movies");
+  showPublicUploads("music", "user-music");
+  showPublicUploads("news", "user-news");
+  showPublicUploads("educational", "user-educational");
+
+</script>
+</body>
+</html>
